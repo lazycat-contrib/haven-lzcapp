@@ -1,0 +1,19 @@
+params:
+  - id: admin_email
+    type: string
+    name: "admin email"
+    description: "the email of the admin"
+
+  - id: admin_password
+    type: string
+    name: "admin password"
+    description: "the password of the admin"
+
+locales:
+  zh:
+    admin_email:
+      name: "管理员邮箱"
+      description: "管理员邮箱"
+    admin_password:
+      name: "管理员密码"
+      description: "管理员密码"

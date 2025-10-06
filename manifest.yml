@@ -1,0 +1,73 @@
+name: Haven
+package: community.lazycat.app.haven
+version: 0.1.0
+min_os_version: 1.3.8
+description: 可自托管私密博客
+homepage: https://github.com/havenweb/haven
+author: havenweb
+application:
+  subdomain: haven
+  background_task: true
+  usb_accel: true
+  public_path:
+    - /
+
+  upstreams:
+    - location: /
+      backend: http://haven:3000/
+
+services:
+  haven:
+    #  ghcr.io/havenweb/haven:latest
+    image: registry.lazycat.cloud/czyt/havenweb/haven:990f33a7bb935a89
+    environment:
+      - RAILS_ENV=production
+      - HAVEN_DB_HOST=haven-pg
+      - HAVEN_DB_NAME=haven
+      - HAVEN_DB_ROLE=haven
+      - HAVEN_DB_PASSWORD=haven
+      - HAVEN_USER_EMAIL={{.U.admin_email}}
+      - HAVEN_USER_PASS={{.U.admin_password}}
+    binds:
+      - /lzcapp/var/storage:/app/storage
+    depends_on:
+      - haven-pg
+
+  haven-pg:
+    # postgres:17-alpine
+    image: registry.lazycat.cloud/czyt/library/postgres:bb84b585f0ed5342
+    container_name: haven-pg
+    command: |
+      postgres -c max_connections=1000
+        -c
+        synchronous_commit=off
+        -c
+        fsync=off
+        -c
+        full_page_writes=off
+        -c
+        max_wal_size=4GB
+        -c
+        checkpoint_timeout=30min
+        -c
+        wal_level=logical
+
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PASSWORD=haven
+      - POSTGRES_USER=haven
+    binds:
+      - /lzcapp/var/data:/var/lib/postgresql/data
+    health_check:
+      test:
+        - CMD-SHELL
+        - pg_isready -U haven
+      start_period: 90s
+
+locales:
+  zh:
+    name: "Haven"
+    description: "可自托管私密博客"
+  en:
+    name: "Haven"
+    description: "Self-hostable private blogging"
