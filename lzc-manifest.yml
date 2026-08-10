@@ -17,11 +17,10 @@ application:
             password: "{{ .U.admin_password }}"
             userSelector: "#user_email"
             passwordSelector: "#user_password"
-
 services:
   haven:
-    # upstream: ghcr.io/havenweb/haven:latest@sha256:b83f5ca18aa6b379325a5633aa4aab05b9852a6ed93ce0c6014512358170a151
-    image: registry.lazycat.cloud/czyt/havenweb/haven:990f33a7bb935a89
+    # upstream: ghcr.io/havenweb/haven:latest@sha256:7dfe1449792dfe2c61cff31005a1d7844d9cdffd6a17eb1b1283442cae9441a4
+    image: registry.lazycat.cloud/czyt/havenweb/haven:c72fc2703fc86d1b
     environment:
       - RAILS_ENV=production
       - HAVEN_DB_HOST=haven-pg
@@ -34,14 +33,11 @@ services:
       - /lzcapp/var/storage:/app/storage
     depends_on:
       - haven-pg
-
   haven-pg:
-    # upstream: docker.io/library/postgres:17-alpine
-    image: registry.lazycat.cloud/czyt/library/postgres:bb84b585f0ed5342
+    # upstream: docker.io/library/postgres:17.10-alpine3.24
+    image: registry.lazycat.cloud/czyt/library/postgres:e5e91267f148f9b5
     command: >-
-      postgres -c max_connections=1000 -c synchronous_commit=off -c fsync=off
-      -c full_page_writes=off -c max_wal_size=4GB -c checkpoint_timeout=30min
-      -c wal_level=logical
+      postgres -c max_connections=1000 -c synchronous_commit=off -c fsync=off -c full_page_writes=off -c max_wal_size=4GB -c checkpoint_timeout=30min -c wal_level=logical
     environment:
       - POSTGRES_DB=haven
       - POSTGRES_PASSWORD={{ stable_secret "haven_db_password" }}
