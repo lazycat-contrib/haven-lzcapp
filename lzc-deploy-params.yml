@@ -1,13 +1,16 @@
 params:
   - id: admin_email
     type: string
-    name: "admin email"
-    description: "the email of the admin"
+    name: "Admin email"
+    description: "Email address used for the initial Haven administrator"
+    optional: false
 
   - id: admin_password
-    type: string
-    name: "admin password"
-    description: "the password of the admin"
+    type: secret
+    name: "Admin password"
+    description: "Password used for the initial Haven administrator"
+    default_value: "$random(len=20)"
+    optional: false
 
 locales:
   zh:

@@ -1,0 +1,20 @@
+package: community.lazycat.app.haven
+version: 0.1.0
+name: Haven
+description: "可自托管私密博客"
+min_os_version: 1.5.0
+homepage: https://github.com/havenweb/haven
+author: havenweb
+unsupported_platforms:
+  - ios
+  - android
+permissions:
+  required:
+    - net.internet
+locales:
+  zh:
+    name: "Haven"
+    description: "可自托管私密博客"
+  en:
+    name: "Haven"
+    description: "Self-hostable private blogging"
