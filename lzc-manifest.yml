@@ -34,8 +34,8 @@ services:
     depends_on:
       - haven-pg
   haven-pg:
-    # upstream: docker.io/library/postgres:17.10-alpine3.24
-    image: registry.lazycat.cloud/czyt/library/postgres:e5e91267f148f9b5
+    # upstream: docker.io/library/postgres:17.11-alpine3.24
+    image: registry.lazycat.cloud/czyt/library/postgres:594425a9a663283a
     command: >-
       postgres -c max_connections=1000 -c synchronous_commit=off -c fsync=off -c full_page_writes=off -c max_wal_size=4GB -c checkpoint_timeout=30min -c wal_level=logical
     environment:
