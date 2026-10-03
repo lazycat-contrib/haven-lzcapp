@@ -19,8 +19,8 @@ application:
             passwordSelector: "#user_password"
 services:
   haven:
-    # upstream: ghcr.io/havenweb/haven:latest@sha256:1e4bceb5b925663c440d5c9a557046898534677d591b8272955dede60e2f6a4f
-    image: registry.lazycat.cloud/czyt/havenweb/haven:98f846297b4dc112
+    # upstream: ghcr.io/havenweb/haven:latest@sha256:045974d8a3e92481f4c83ce996c6bdd8787ebf423cf8fe2564a3825ed672bf71
+    image: registry.lazycat.cloud/czyt/havenweb/haven:16f8c9c702d0fb49
     environment:
       - RAILS_ENV=production
       - HAVEN_DB_HOST=haven-pg
