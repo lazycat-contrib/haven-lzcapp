@@ -1,4 +1,5 @@
 package: community.lazycat.app.haven
+license: MIT
 version: 0.1.4
 name: Haven
 description: "可自托管私密博客"
