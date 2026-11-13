@@ -19,8 +19,8 @@ application:
             passwordSelector: "#user_password"
 services:
   haven:
-    # upstream: ghcr.io/havenweb/haven:latest@sha256:045974d8a3e92481f4c83ce996c6bdd8787ebf423cf8fe2564a3825ed672bf71
-    image: registry.lazycat.cloud/czyt/havenweb/haven:16f8c9c702d0fb49
+    # upstream: ghcr.io/havenweb/haven:latest@sha256:00b9421e01c04100d1aee6ce2df4605f6a9cea522327ca5fdee000b607b4605c
+    image: registry.lazycat.cloud/czyt/havenweb/haven:c9ae463b7a4b83b3
     environment:
       - RAILS_ENV=production
       - HAVEN_DB_HOST=haven-pg
@@ -34,8 +34,8 @@ services:
     depends_on:
       - haven-pg
   haven-pg:
-    # upstream: docker.io/library/postgres:17.11-alpine3.24
-    image: registry.lazycat.cloud/czyt/library/postgres:594425a9a663283a
+    # upstream: docker.io/library/postgres:17.12-alpine3.24
+    image: registry.lazycat.cloud/czyt/library/postgres:3a17c8b2324bea97
     command: >-
       postgres -c max_connections=1000 -c synchronous_commit=off -c fsync=off -c full_page_writes=off -c max_wal_size=4GB -c checkpoint_timeout=30min -c wal_level=logical
     environment:
